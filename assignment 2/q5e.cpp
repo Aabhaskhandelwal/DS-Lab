@@ -19,7 +19,6 @@ int main() {
             if (i >= j) {
                 cout << sym[k++] << " ";
             } else {
-                // use symmetry property
                 int idx = j*(j+1)/2 + i;
                 cout << sym[idx] << " ";
             }

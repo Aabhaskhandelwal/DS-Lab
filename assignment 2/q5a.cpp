@@ -7,7 +7,7 @@ int main() {
     cin >> n;
 
     int diag[n];
-    cout << "Enter " << n << " diagonal elements: ";
+    cout << n << " diagonal elements: ";
     for (int i = 0; i < n; i++) cin >> diag[i];
 
     cout << "\nDiagonal Matrix:\n";

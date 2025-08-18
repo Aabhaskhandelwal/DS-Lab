@@ -15,7 +15,7 @@ int missing_binary(int arr[], int n) {
            high = mid-1; 
         }
     }
-    return low + 1; 
+    return low+1; 
 }
 
 int main() {
