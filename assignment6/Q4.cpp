@@ -1,87 +1,81 @@
 #include <iostream>
 using namespace std;
 
-struct Node 
+struct Node
 {
     char data;
-    Node* prev;
-    Node* next;
+    Node *prev;
+    Node *next;
+
     Node(char val)
     {
-        data=val;
-        prev=nullptr;
-        next=nullptr;
+        data = val;
+        prev = nullptr;
+        next = nullptr;
     }
 };
 
-void insertAtEnd(Node*& head, char val)
+bool isPalindrome(Node *head)
 {
-    Node*newNode=new Node(val);
+    if (head == nullptr || head->next == nullptr)
+        return true;
 
-    if(head==nullptr)
+    Node *tail = head;
+    while (tail->next != nullptr)
+        tail = tail->next;
+
+    while (head != tail)
     {
-        head=newNode;
-        return;
-    }
-    Node* temp=head;
-    while(temp->next!=nullptr)
-    temp = temp->next;
+        if (head->data != tail->data)
+            return false;
 
-    temp->next=newNode;
-    newNode->prev=temp;
-}
-
-bool isPalindrome(Node* head)
-{
-    if (head==nullptr || head->next==nullptr)
-    return true; // Empty or single-node list is palindrome
-
-    Node* tail=head;
-    while (tail->next!=nullptr)
-    tail=tail->next;
-
-    while (head!=tail && tail->next!=head)
-    {
-        if (head->data!=tail->data)
-        return false;
-
-        head=head->next;
-        tail=tail->prev;
+        head = head->next;
+        tail = tail->prev;
     }
     return true;
 }
 
 int main()
 {
-    Node* head1=nullptr;
+    // List 1: level
+    Node *head1 = new Node('l');
+    head1->next = new Node('e');
+    head1->next->prev = head1;
 
-    //Example 1
-    insertAtEnd(head1,'l');
-    insertAtEnd(head1,'e');
-    insertAtEnd(head1,'v');
-    insertAtEnd(head1,'e');
-    insertAtEnd(head1,'l');
+    head1->next->next = new Node('v');
+    head1->next->next->prev = head1->next;
 
-    cout<<"List 1 is ";
-    if(isPalindrome(head1))
-    cout<<"Is Palindrome\n";
+    head1->next->next->next = new Node('e');
+    head1->next->next->next->prev = head1->next->next;
 
+    head1->next->next->next->next = new Node('l');
+    head1->next->next->next->next->prev = head1->next->next->next;
+
+    cout << "List 1 is ";
+    if (isPalindrome(head1))
+        cout << "Is Palindrome\n";
     else
-    cout<<"Not Palindrome\n";
+        cout << "Not Palindrome\n";
 
-    // Example 2
-    Node* head2=nullptr;
-    insertAtEnd(head2,'h');
-    insertAtEnd(head2,'e');
-    insertAtEnd(head2,'l');
-    insertAtEnd(head2,'l');
-    insertAtEnd(head2,'o');
+    // List 2: hello
+    Node *head2 = new Node('h');
+    head2->next = new Node('e');
+    head2->next->prev = head2;
 
-    cout<<"List 2 is ";
-    if(isPalindrome(head2))
-    cout<<"Is Palindrome\n";
+    head2->next->next = new Node('l');
+    head2->next->next->prev = head2->next;
 
+    head2->next->next->next = new Node('l');
+    head2->next->next->next->prev = head2->next->next;
+
+    head2->next->next->next->next = new Node('o');
+    head2->next->next->next->next->prev = head2->next->next->next;
+
+    cout << "List 2 is ";
+    if (isPalindrome(head2))
+        cout << "Is Palindrome\n";
     else
-    cout<<"Not Palindrome\n";
+        cout << "Not Palindrome\n";
+
     return 0;
 }
